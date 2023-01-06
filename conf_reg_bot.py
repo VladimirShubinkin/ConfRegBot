@@ -81,12 +81,12 @@ async def help(message: Message):  # обработчик команды /help
 
 @dp.message_handler(commands='address')
 async def get_address(message: Message):  # обработчик команды /address
-    '''По команде /address пользователь может получить адрес места проведения конференции, а также карту.
-    В связи с требованием анонимности будут показаны данные одной из трёх случайно выбранных мною школ'''
-    schools = ['Калининград, ул. Новый вал, 23',
-               'Краснодар, Красноармейская ул., 2',
-               'Владивосток, улица Адмирала Кузнецова, 40а']
-    school = choice(schools)
+    '''По команде /address пользователь может получить адрес места проведения конференции, а также карту.'''
+    # schools = ['Калининград, ул. Новый вал, 23',
+    #            'Краснодар, Красноармейская ул., 2',
+    #            'Владивосток, улица Адмирала Кузнецова, 40а']
+    # school = choice(schools)
+    school = 'Казань, ул. Бутлерова, 54'
     geocoder_api_server = "http://geocode-maps.yandex.ru/1.x/"
     geocoder_params = {
         "apikey": "40d1649f-0493-4b70-98ba-98533de7710b",
@@ -101,19 +101,19 @@ async def get_address(message: Message):  # обработчик команды 
     ll = ",".join([toponym_longitude, toponym_lattitude])
     spn = ",".join([delta, delta])
     static_api_request = f"http://static-maps.yandex.ru/1.x/?ll={ll}&spn={spn}&l=map"
-    await message.answer_photo(static_api_request, f'{school}\nРеальный адрес скрыт в связи с требованием анонимности')
+    await message.answer_photo(static_api_request, f'{school}\nКазань, ул. Бутлерова, 54')
 
 
 @dp.message_handler(commands='site')
 async def get_site(message: Message):
     '''по команде /site пользователь получал бы ссылку на страницу конференции на сайте школы'''
-    await message.answer('Доступ к сайту конференции закрыт в связи с требованием анонимности')
+    await message.answer('https://edu.tatar.ru/vahit/fml131/science_days')
 
 
 @dp.message_handler(commands='email')
 async def get_email(message: Message):
     '''по команде /email пользователь получал бы e-mail оргкомитета конференции'''
-    await message.answer('Адрес скрыт в связи с требованием анонимности')
+    await message.answer('lyc131@yandex.ru')
 
 
 @dp.message_handler(commands='show')
